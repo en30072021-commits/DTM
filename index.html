@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Смета модульных зданий — ООО ДТМ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <header class="header">
+            <h1>Смета модульных зданий</h1>
+            <div class="menu-bar">
+                <button id="settingsBtn" class="menu-btn">⚙ Настройки</button>
+            </div>
+        </header>
+
+        <div class="main-container">
+            <nav class="nav-panel" id="navPanel">
+                <h2>НАВИГАЦИЯ</h2>
+                <ul id="navList">
+                    <li><button class="nav-btn active" data-step="0">1. Модули</button></li>
+                    <li><button class="nav-btn" data-step="1">2. Электрика</button></li>
+                    <li><button class="nav-btn" data-step="2">3. Окна и двери</button></li>
+                    <li><button class="nav-btn" data-step="3">4. Сантехника</button></li>
+                    <li><button class="nav-btn" data-step="4">5. Отделка и мебель</button></li>
+                    <li><button class="nav-btn" data-step="5">6. Безопасность</button></li>
+                    <li><button class="nav-btn" data-step="6">7. Смета</button></li>
+                </ul>
+            </nav>
+
+            <main class="content-area">
+                <div class="step-container" id="stepContainer">
+                    <!-- Step 1: Modules -->
+                    <div class="step active" id="step0">
+                        <h2>1. Выберите модули</h2>
+                        <div class="modules-grid" id="modulesGrid">
+                            <div class="module-card" data-module="Транспак 6000x2440">
+                                <h3>Транспак 6000×2440</h3>
+                                <p>14.64 м² • 16.88 м</p>
+                                <div class="quantity-control">
+                                    <button class="btn-minus" data-module="Транспак 6000x2440">−</button>
+                                    <input type="number" class="quantity-input" data-module="Транспак 6000x2440" min="0" max="50" value="0">
+                                    <button class="btn-plus" data-module="Транспак 6000x2440">+</button>
+                                    <span class="cost-label" data-module="Транспак 6000x2440">0 ₽</span>
+                                </div>
+                            </div>
+                            <div class="module-card" data-module="Транспак 4880x2440">
+                                <h3>Транспак 4880×2440</h3>
+                                <p>11.91 м² • 14.64 м</p>
+                                <div class="quantity-control">
+                                    <button class="btn-minus" data-module="Транспак 4880x2440">−</button>
+                                    <input type="number" class="quantity-input" data-module="Транспак 4880x2440" min="0" max="50" value="0">
+                                    <button class="btn-plus" data-module="Транспак 4880x2440">+</button>
+                                    <span class="cost-label" data-module="Транспак 4880x2440">0 ₽</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="add-module-section">
+                            <button id="addModuleBtn">➕ Добавить модуль</button>
+                        </div>
+
+                        <div class="navigation-buttons">
+                            <button class="nav-btn-secondary" id="back0" disabled>← Назад</button>
+                            <button class="nav-btn-primary" id="next0">Далее →</button>
+                        </div>
+                    </div>
+
+                    <!-- Steps 2-6: Dynamic Categories -->
+                    <div class="step" id="step1">
+                        <h2>2. Электрика</h2>
+                        <div class="categories-container" id="step1-content"></div>
+                        <div class="navigation-buttons">
+                            <button class="nav-btn-secondary" id="back1">← Назад</button>
+                            <button class="nav-btn-primary" id="next1">Далее →</button>
+                        </div>
+                    </div>
+                    <div class="step" id="step2">
+                        <h2>3. Окна и двери</h2>
+                        <div class="categories-container" id="step2-content"></div>
+                        <div class="navigation-buttons">
+                            <button class="nav-btn-secondary" id="back2">← Назад</button>
+                            <button class="nav-btn-primary" id="next2">Далее →</button>
+                        </div>
+                    </div>
+                    <div class="step" id="step3">
+                        <h2>4. Сантехника</h2>
+                        <div class="categories-container" id="step3-content"></div>
+                        <div class="navigation-buttons">
+                            <button class="nav-btn-secondary" id="back3">← Назад</button>
+                            <button class="nav-btn-primary" id="next3">Далее →</button>
+                        </div>
+                    </div>
+                    <div class="step" id="step4">
+                        <h2>5. Отделка и мебель</h2>
+                        <div class="categories-container" id="step4-content"></div>
+                        <div class="navigation-buttons">
+                            <button class="nav-btn-secondary" id="back4">← Назад</button>
+                            <button class="nav-btn-primary" id="next4">Далее →</button>
+                        </div>
+                    </div>
+                    <div class="step" id="step5">
+                        <h2>6. Безопасность</h2>
+                        <div class="categories-container" id="step5-content"></div>
+                        <div class="navigation-buttons">
+                            <button class="nav-btn-secondary" id="back5">← Назад</button>
+                            <button class="nav-btn-primary" id="next5">Далее →</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 7: Report -->
+                    <div class="step" id="step6">
+                        <h2>7. Смета</h2>
+                        <div class="report-tabs">
+                            <div class="tab-buttons">
+                                <button class="tab-btn active" data-tab="detailed">Подробная смета</button>
+                                <button class="tab-btn" data-tab="summary">Краткая сводка</button>
+                            </div>
+                            <div class="tab-content active" id="detailedTab">
+                                <div class="report-content" id="detailedReport"></div>
+                            </div>
+                            <div class="tab-content" id="summaryTab">
+                                <div class="report-content" id="summaryReport"></div>
+                            </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button class="nav-btn-secondary" id="back6">← Назад</button>
+                            <button class="nav-btn-primary" id="exportBtn">💾 Экспорт в HTML</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <aside class="summary-panel" id="summaryPanel">
+                <h2>ТЕКУЩИЙ ПРОЕКТ</h2>
+                <div class="summary-content" id="summaryContent">
+                    <p><i>Ничего не добавлено</i></p>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Settings Modal -->
+        <div class="modal" id="settingsModal">
+            <div class="modal-content">
+                <h3>Настройки</h3>
+                <div class="settings-section">
+                    <label>
+                        <input type="checkbox" id="useVatCheckbox"> Включить расчёт НДС
+                    </label>
+                    <label>
+                        Ставка НДС: <input type="number" id="vatRateInput" min="0" max="100" step="0.01" value="20.00"> %
+                    </label>
+                </div>
+                <div class="settings-section">
+                    <button id="openCatalogBtn">Каталог позиций</button>
+                </div>
+                <div class="modal-actions">
+                    <button id="saveSettingsBtn">Сохранить</button>
+                    <button id="closeSettingsBtn">Закрыть</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Catalog Editor Modal -->
+        <div class="modal" id="catalogModal">
+            <div class="modal-content large">
+                <h3>Каталог позиций</h3>
+                <div class="catalog-controls">
+                    <button id="addCatalogItemBtn">➕ Добавить</button>
+                    <button id="removeCatalogItemBtn">🗑 Удалить</button>
+                    <button id="refreshCatalogBtn">🔄 Обновить</button>
+                </div>
+                <div class="catalog-tree" id="catalogTree"></div>
+                <div class="modal-actions">
+                    <button id="closeCatalogBtn">Закрыть</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add/Edit Item Modal -->
+        <div class="modal" id="addItemModal">
+            <div class="modal-content">
+                <h3 id="addItemTitle">Новая позиция</h3>
+                <div class="form-group">
+                    <label for="itemCategorySelect">Категория:</label>
+                    <select id="itemCategorySelect"></select>
+                </div>
+                <div class="form-group">
+                    <label for="itemNameInput">Наименование:</label>
+                    <input type="text" id="itemNameInput" placeholder="Введите наименование">
+                </div>
+                <div class="form-group">
+                    <label for="itemUnitInput">Единица измерения:</label>
+                    <input type="text" id="itemUnitInput" placeholder="шт, м, м² и т.д.">
+                </div>
+                <div class="form-group">
+                    <label for="itemPriceInput">Цена (руб):</label>
+                    <input type="number" id="itemPriceInput" min="0" step="0.01" placeholder="0.00">
+                </div>
+                <div class="modal-actions">
+                    <button id="saveItemBtn">Сохранить</button>
+                    <button id="cancelItemBtn">Отмена</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Module Modal -->
+        <div class="modal" id="addModuleModal">
+            <div class="modal-content">
+                <h3>Добавить модуль</h3>
+                <div class="form-group">
+                    <label for="moduleNameInput">Наименование:</label>
+                    <input type="text" id="moduleNameInput" placeholder="Например: Транспак 3000x2440">
+                </div>
+                <div class="form-group">
+                    <label for="moduleAreaInput">Площадь (м²):</label>
+                    <input type="number" id="moduleAreaInput" min="0" step="0.01" placeholder="11.91">
+                </div>
+                <div class="form-group">
+                    <label for="modulePerimeterInput">Периметр (м):</label>
+                    <input type="number" id="modulePerimeterInput" min="0" step="0.01" placeholder="14.64">
+                </div>
+                <div class="modal-actions">
+                    <button id="saveModuleBtn">Сохранить</button>
+                    <button id="cancelModuleBtn">Отмена</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
